@@ -1,10 +1,9 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: 'https://decisio-backend.pxxl.click',
 })
 
-// Automatically attach token to every request
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')
   if (token) {
