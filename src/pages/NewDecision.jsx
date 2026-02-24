@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import api from '../services/api'
 import Navbar from '../components/Navbar'
 
+
 function ScoreSlider({ label, name, description, value, onChange }) {
   const percent = ((value - 1) / 9) * 100
-
   return (
     <div className="bg-zinc-900 rounded-2xl p-5 border border-zinc-800">
       <div className="flex justify-between items-start mb-1">
@@ -36,6 +36,7 @@ function ScoreSlider({ label, name, description, value, onChange }) {
     </div>
   )
 }
+
 
 export default function NewDecision() {
   const navigate = useNavigate()

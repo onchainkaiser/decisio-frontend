@@ -7,6 +7,7 @@ export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -32,7 +33,6 @@ export default function Login() {
     <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
 
-        {/* Logo */}
         <div className="flex flex-col items-center mb-10">
           <div className="w-12 h-12 rounded-2xl bg-violet-600 flex items-center justify-center mb-4 shadow-lg shadow-violet-500/20">
             <span className="text-white text-xl font-bold">D</span>
@@ -41,7 +41,6 @@ export default function Login() {
           <p className="text-zinc-500 text-sm mt-1">Sign in to your Decisio account</p>
         </div>
 
-        {/* Card */}
         <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800">
 
           {error && (
@@ -60,27 +59,37 @@ export default function Login() {
                 value={form.email}
                 onChange={handleChange}
                 placeholder="you@email.com"
-                className="w-full bg-zinc-800 border border-zinc-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500/30 transition placeholder-zinc-600"
+                className="w-full bg-zinc-800 border border-zinc-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-violet-500 transition placeholder-zinc-600"
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-zinc-400 mb-2">Password</label>
-              <input
-                name="password"
-                type="password"
-                required
-                value={form.password}
-                onChange={handleChange}
-                placeholder="••••••••"
-                className="w-full bg-zinc-800 border border-zinc-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500/30 transition placeholder-zinc-600"
-              />
+              <div className="relative">
+                <input
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  required
+                  value={form.password}
+                  onChange={handleChange}
+                  placeholder="••••••••"
+                  className="w-full bg-zinc-800 border border-zinc-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-violet-500 transition placeholder-zinc-600 pr-12"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition text-sm"
+                >
+                  {showPassword ? '🙈' : '👁️'}
+                </button>
+              </div>
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-violet-600 hover:bg-violet-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl transition-all duration-200 shadow-lg shadow-violet-500/20 mt-2"
+              style={{ backgroundColor: loading ? '#52525b' : '#7c3aed' }}
+              className="w-full text-white font-semibold py-3 rounded-xl transition-all duration-200 mt-2"
             >
               {loading ? 'Signing in...' : 'Sign in'}
             </button>
